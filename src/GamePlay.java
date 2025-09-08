@@ -1,4 +1,5 @@
-public class GamPlay {
+import java.util.Scanner;
+public class GamePlay {
     private static Person player;
 
     public static void main(String[] args) {
