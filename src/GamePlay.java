@@ -1,7 +1,8 @@
 import java.util.Scanner;
+
 public class GamePlay {
     private static Person player;
-
+    private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
@@ -11,7 +12,7 @@ public class GamePlay {
 
         if(response.equals("yes")) {
             System.out.println("Enter your last name: ");
-            String lastName = scanner.nextLne();
+            String lastName = scanner.nextLine();
 
             player = new Person(firstName, lastName);
         } else {

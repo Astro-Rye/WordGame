@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Numbers {
     // create a class called 'Numbers'[x]
 
@@ -11,11 +12,11 @@ public class Numbers {
     }
     // setters
     public void setRandomNum(int randomNum){
-        this.setRandomNum = setRandomNum;
+        this.randomNum = randomNum;
     }
     public void generateNumber(){
         Random random = new Random();
-        this.randomNum = rand.nextInt(101);
+        this.randomNum = random.nextInt(101);
     }
 
     //
@@ -24,7 +25,7 @@ public class Numbers {
             System.out.println("Congratulations, you guessed the number!");
             return true;
         } else if (guess > randomNum) {
-            System.out.println("Im soryr. That guess was too high");
+            System.out.println("Im sorry. That guess was too high");
         } else {
             System.out.println("Im sorry. That guess was too low");
         }
