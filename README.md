@@ -1,5 +1,5 @@
 # WordGame
-### Lesson2 Console Output
+### Lesson2: Console Output
 ```
 Enter your first name: 
 Joseph
