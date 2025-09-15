@@ -3,7 +3,7 @@ public class Numbers {
     // create a class called 'Numbers'[x]
 
     // 2. Add a private integer field called 'randomNum'[]
-    private int randomNum;
+    private static int randomNum;
 
     // 3. public getters and setters
     // getters

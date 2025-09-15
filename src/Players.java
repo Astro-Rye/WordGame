@@ -4,11 +4,11 @@ public class Players extends Person {
 
     public Players(String firstName) {
         super(firstName);
-
+        this.money = STARTING_MONEY;
     }
     public Players(String firstName, String lastName) {
         super(firstName, lastName);
-    }
+this.money = STARTING_MONEY;}
 
     public int getMoney() {
         return money;
