@@ -8,7 +8,7 @@ public class Players extends Person {
     }
     public Players(String firstName, String lastName) {
         super(firstName, lastName);
-this.money = STARTING_MONEY;}
+        this.money = STARTING_MONEY;}
 
     public int getMoney() {
         return money;
@@ -19,8 +19,11 @@ this.money = STARTING_MONEY;}
     }
 
     @Override
-    public String toString(){
-return getFirstName() +""+getLastName() + getMoney();}
+    public String toString() {
+        String fullName = (getFirstName() + " " + getLastName().trim());
+
+        return fullName + " - Money: $ " + getMoney();
+    }
 }
 
 

@@ -5,10 +5,11 @@ private static final int WIN_AMOUNT = 200; // pick your values
     private final Scanner scanner = new Scanner(System.in);
 
   public boolean takeTurn(Players player, Hosts host){
-      // host prompts players (simulates a show host spekaing)
+      // host prompts players (simulates a show host speakaing)
       System.out.println(host.getFirstName() + ": " + player.getFirstName() + ", enter your guess(0-100): ");
 
       int guess = scanner.nextInt(); // moved from GamePlay
+      scanner.nextLine();
 
       Numbers nums = new Numbers();
       boolean guessedCorrectly = nums.compareNumber(guess);
