@@ -1,9 +1,15 @@
 import java.util.Scanner;
 
 public class GamePlay {
-    private static Person player;
+    private static Players player;
     private static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
+        Scanner input = new Scanner(System.in); // only for name + play again
+        // Host first, then generate the random number
+        Hosts host = new Hosts("Pat");
+        host.randomizeNum();
+
         System.out.println("Enter your first name: ");
         String firstName = scanner.nextLine();
 
@@ -13,23 +19,29 @@ public class GamePlay {
         if(response.equals("yes")) {
             System.out.println("Enter your last name: ");
             String lastName = scanner.nextLine();
-
-            player = new Person(firstName, lastName);
+            player = new Players(firstName, lastName);
         } else {
-            player = new Person(firstName);
+            player = new Players(firstName);
         }
 
-        // Create  a numbers object and generate a number
-        Numbers game = new Numbers();
-        game.generateNumber();
+        Turn turn = new Turn();
+        // outer loop, play again
+        boolean playAgain = true;
+        while(playAgain) {
+            // inner loop - keep guessing until correct
+            boolean guessedCorrectly = false;
+            while(!guessedCorrectly) {
+                guessedCorrectly = turn.takeTurn(player, host);
+            }
 
-        // guessing loop
-        boolean guessedCorrectly = false;
-        while (!guessedCorrectly) {
-            System.out.println(player.getFirstName() + ", enter your guess (0-100): ");
-            int guess = scanner.nextInt();
-            guessedCorrectly = game.compareNumber(guess);
+            System.out.println("Play Again? (y/n): ");
+            String again = input.nextLine().trim().toLowerCase();
+
+            if(again.startsWith("y")) {
+                host.randomizeNum(); // a new number or the* secret number for the next game should be generated
+            } else {
+                playAgain = false;
+            }
         }
-        scanner.close();
     }
 }
