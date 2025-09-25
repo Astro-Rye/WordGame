@@ -5,35 +5,30 @@ class Person {
     private String lastName;
 
     //-- 3: add public getters and setters for both
-    // --- getter ---
+    // --- getter & setter --- for firstName
     public String getFirstName() {
         return firstName;
     }
-    // --- setter ---
     public void setFirstName(String firstName){
         this.firstName = firstName;
     }
+
+    // getter & setter for LastName
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
     // Constructors
-    // first name
+    // constructor for the first name
     public Person(String firstName){
         this.firstName = firstName;
-        this.lastName = "";
+        this.lastName = ""; // sets the last name to default
     }
     public Person(String firstName, String lastName){
-        this.firstName = firstName;
+        this.firstName = firstName; // accepts
         this.lastName = lastName;
-    }
-
-
-    public static void main(String[] args) {
-        
     }
 }

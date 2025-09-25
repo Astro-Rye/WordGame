@@ -5,7 +5,7 @@ private static final int WIN_AMOUNT = 200; // pick your values
     private final Scanner scanner = new Scanner(System.in);
 
   public boolean takeTurn(Players player, Hosts host){
-      // host prompts players (simulates a show host speakaing)
+      // host prompts players (simulates a show host speaking)
       System.out.println(host.getFirstName() + ": " + player.getFirstName() + ", enter your guess(0-100): ");
 
       int guess = scanner.nextInt(); // moved from GamePlay
@@ -19,6 +19,7 @@ private static final int WIN_AMOUNT = 200; // pick your values
             return true;
         } else {
             player.setMoney(player.getMoney() - LOSS_AMOUNT);
+            System.out.println("[debug] secret = " + Numbers.getRandomNum());
             System.out.println(player);
             return false;
         }

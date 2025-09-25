@@ -8,20 +8,17 @@ public class Players extends Person {
     }
     public Players(String firstName, String lastName) {
         super(firstName, lastName);
-        this.money = STARTING_MONEY;}
-
-    public int getMoney() {
-        return money;
+        this.money = STARTING_MONEY;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
+    // getters & setters for returning money and getting money
+    public int getMoney() { return money; }
+    public void setMoney(int money) { this.money = money; }
 
+    // override - displays Players name and returns their starting allotment
     @Override
     public String toString() {
         String fullName = (getFirstName() + " " + getLastName().trim());
-
         return fullName + " - Money: $ " + getMoney();
     }
 }

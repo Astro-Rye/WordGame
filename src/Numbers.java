@@ -7,9 +7,10 @@ public class Numbers {
 
     // 3. public getters and setters
     // getters
-    public int getRandomNum() {
-        return randomNum;
-    }
+    //public int getRandomNum() {
+      //  return randomNum;
+    //}
+    public static int getRandomNum() {return randomNum;}
     // setters
     public void setRandomNum(int randomNum){
         this.randomNum = randomNum;
