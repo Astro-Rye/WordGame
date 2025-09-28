@@ -15,7 +15,7 @@ public class GamePlay {
 
 
         for (int i = 0; i < currentPlayers.length; i++) {
-            System.out.println("Enter first name for player " + i++ + " :");
+            System.out.println("Enter first name for player " + (i+1) +  " :");
             String first = input.nextLine().trim();
 
             System.out.println("Add a last name? (yes/no): ");
