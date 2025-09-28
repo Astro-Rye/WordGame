@@ -1,7 +1,6 @@
 import java.util.Scanner;
 public class Turn {
-private static final int WIN_AMOUNT = 200; // pick your values
-    private static final int LOSS_AMOUNT = 50; // pick your values
+
     private final Scanner scanner = new Scanner(System.in);
 
   public boolean takeTurn(Players player, Hosts host){
@@ -13,15 +12,28 @@ private static final int WIN_AMOUNT = 200; // pick your values
 
       Numbers nums = new Numbers();
       boolean guessedCorrectly = nums.compareNumber(guess);
-        if(guessedCorrectly){
-            player.setMoney(player.getMoney() + WIN_AMOUNT);
-            System.out.println("Congratulations! " + player);
-            return true;
-        } else {
-            player.setMoney(player.getMoney() - LOSS_AMOUNT);
-            System.out.println("[debug] secret = " + Numbers.getRandomNum());
-            System.out.println(player);
-            return false;
-        }
+
+      // decide the prize type
+      java.util.Random rng = new java.util.Random();
+      int coin = rng.nextInt(2);
+      boolean moneyPrize = (coin == 0);
+
+      // the right award
+      Award award;
+      if(moneyPrize) {
+          award = new Money();
+      } else {
+          award = new Physical();
+      }
+
+      // show winnings and get the int change to money
+      int delta = award.displayWinnings(player, guessedCorrectly);
+      // update players money
+      player.setMoney(player.getMoney() + delta);
+
+      // show player status
+      System.out.println(player);
+
+      return guessedCorrectly;
   }
 }
