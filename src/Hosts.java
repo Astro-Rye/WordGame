@@ -7,8 +7,9 @@ public class Hosts extends Person {
         super(firstName, lastName);
     }
 
-    public void randomizeNum() {
-        Numbers n = new Numbers();
-        n.generateNumber();
+    // The host will start a round by providing a phrase
+    public Phrases startRoundWithPhrase(String phrase) {
+        Phrases.setGamePhrase(phrase);
+        return new Phrases();
     }
 }

@@ -11,7 +11,12 @@ public class GamePlay {
         Scanner input = new Scanner(System.in); // only for name + play again
         // Host first, then generate the random number
         Hosts host = new Hosts("Pat");
-        host.randomizeNum();
+        System.out.println(host.getFirstName() + ", enter a phrase for this round: ");
+        String phrase = input.nextLine();
+        Phrases round = host.startRoundWithPhrase(phrase);
+
+        // showing masked phrase for now:
+        System.out.println("Phrase: " + round.getPlayingPhrase());
 
 
         for (int i = 0; i < currentPlayers.length; i++) {
@@ -48,7 +53,6 @@ public class GamePlay {
             String again = input.nextLine().trim().toLowerCase();
 
             if(again.startsWith("y")) {
-                host.randomizeNum(); // a new number or the* secret number for the next game should be generated
             } else {
                 playAgain = false;
             }
