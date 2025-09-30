@@ -41,7 +41,7 @@ public class GamePlay {
                 System.out.println(host.getFirstName() + ", enter a phrase for this round: ");
                 String phrase = input.nextLine();
                 Phrases round = host.startRoundWithPhrase(phrase);
-                System.out.println("Phrase: " + host.startRoundWithPhrase(phrase));
+                System.out.println("Phrase: " + round.getPlayingPhrase());
 
                while(!solved) {
                    Players current = currentPlayers[idx];

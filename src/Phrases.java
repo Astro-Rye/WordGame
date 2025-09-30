@@ -1,27 +1,23 @@
 public class Phrases {
-    // shared across the round( which is set by the Host)
     private static String gamePhrase; // static field
+    private String playingPhrase; // object
 
-    //2. per round working string with underscores for letters
-    private static String playingPhrase; // object
-
-    // host provides the phrase assign gamePhrase and build playingPhrase
-    //Constructors
 
     // A. the host will set the gamePhrase first, then we can build from there
     public Phrases() {
         if(gamePhrase == null) {
             gamePhrase = "";
+            this.playingPhrase = maskPhrase(gamePhrase);
         }
     }
 
-    // getters and setters for the shared phrase
+
     public static void setGamePhrase(String phrase){
-        gamePhrase = phrase != null ? phrase : "";
+        gamePhrase = (phrase != null) ? phrase : "";
     }
 
     public static String getGamePhrase() {
-        return playingPhrase;
+        return gamePhrase;
     }
     // for the UI of the turn
     public String getPlayingPhrase() {
@@ -32,14 +28,6 @@ public class Phrases {
     public boolean isSolved() {
         return playingPhrase.indexOf('_') == -1;
     }
-
-    /**
-     * Reveal all occurrences of the given letter
-     * @param input one character string(letter) if longer than one, throws 'MultipleLettersException'
-     *              if not a letter(number/symbol), we throw IllegalArgumentException(Turn should catch)
-     * @return how many letters were revealed (0 = no matches; >0 = at least one match
-     * @throws MultipleLettersException if input length > 1 (after trim)
-     */
 
     public int findLetters(String input) throws MultipleLettersException {
         if (input == null) {
