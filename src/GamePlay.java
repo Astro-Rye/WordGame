@@ -11,13 +11,6 @@ public class GamePlay {
         Scanner input = new Scanner(System.in); // only for name + play again
         // Host first, then generate the random number
         Hosts host = new Hosts("Pat");
-        System.out.println(host.getFirstName() + ", enter a phrase for this round: ");
-        String phrase = input.nextLine();
-        Phrases round = host.startRoundWithPhrase(phrase);
-
-        // showing masked phrase for now:
-        System.out.println("Phrase: " + round.getPlayingPhrase());
-
 
         for (int i = 0; i < currentPlayers.length; i++) {
             System.out.println("Enter first name for player " + (i+1) +  " :");
@@ -38,24 +31,28 @@ public class GamePlay {
         Turn turn = new Turn();
         // outer loop, play again
         boolean playAgain = true;
-        while(playAgain) {
+
             // inner loop - keep guessing until correct
             boolean guessedCorrectly = false;
+            boolean solved = false;
             int idx = 0;
 
-            while(!guessedCorrectly) {
-                Players current = currentPlayers[idx];
-                guessedCorrectly = turn.takeTurn(current, host);
-                idx = (idx++);
+            while(playAgain) {
+                System.out.println(host.getFirstName() + ", enter a phrase for this round: ");
+                String phrase = input.nextLine();
+                Phrases round = host.startRoundWithPhrase(phrase);
+                System.out.println("Phrase: " + host.startRoundWithPhrase(phrase));
+
+               while(!solved) {
+                   Players current = currentPlayers[idx];
+                   solved = turn.takeTurn(current, host, round);
+                   idx = (idx + 1 % currentPlayers.length);
+               }
             }
 
             System.out.println("Play Again? (y/n): ");
             String again = input.nextLine().trim().toLowerCase();
+            playAgain = again.startsWith("y");
 
-            if(again.startsWith("y")) {
-            } else {
-                playAgain = false;
-            }
-        }
     }
 }
