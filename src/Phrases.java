@@ -30,6 +30,9 @@ public class Phrases {
     }
 
     public int findLetters(String input) throws MultipleLettersException {
+        if(playingPhrase == null){
+            playingPhrase = maskPhrase(gamePhrase);
+        }
         if (input == null) {
             throw new IllegalArgumentException("Please enter a single letter(A-Z)");
         }
@@ -80,15 +83,10 @@ public class Phrases {
         if(phrase == null) return "";
         StringBuilder sb = new StringBuilder(phrase.length());
 
-        for(int i = 0; i < phrase.length(); i++){
-            char c = phrase.charAt(i);
-            if(Character.isLetter(c)) {
-                sb.append('_');
-            } else {
-                // keep spaces and punctuation
-                sb.append(c);
+            for(int i=0; i < phrase.length(); i++){
+                char c = phrase.charAt(i);
+                sb.append(Character.isLetter(c) ? '_' : c);
             }
-        }
         return sb.toString();
     }
 }
