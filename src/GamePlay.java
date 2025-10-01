@@ -1,9 +1,6 @@
 import java.util.Scanner;
 
 public class GamePlay {
-    private static Players player;
-    private static Scanner scanner = new Scanner(System.in);
-
     // instance variables of Players
     private static Players[] currentPlayers = new Players[3]; // holds 3 elements of type player
 
@@ -28,14 +25,13 @@ public class GamePlay {
             }
         }
 
-        Turn turn = new Turn();
+            Turn turn = new Turn();
         // outer loop, play again
-        boolean playAgain = true;
+            boolean playAgain = true;
 
             // inner loop - keep guessing until correct
             boolean guessedCorrectly = false;
-            boolean solved = false;
-            int idx = 0;
+
 
             while(playAgain) {
                 System.out.println(host.getFirstName() + ", enter a phrase for this round: ");
@@ -43,16 +39,18 @@ public class GamePlay {
                 Phrases round = host.startRoundWithPhrase(phrase);
                 System.out.println("Phrase: " + round.getPlayingPhrase());
 
+                boolean solved = false;
+                int idx = 0;
+
                while(!solved) {
                    Players current = currentPlayers[idx];
                    solved = turn.takeTurn(current, host, round);
-                   idx = (idx + 1 % currentPlayers.length);
+                   idx = (idx + 1) % currentPlayers.length;
+
                }
+                System.out.println("Play Again? (y/n): ");
+                String again = input.nextLine().trim().toLowerCase();
+                playAgain = again.startsWith("y");
             }
-
-            System.out.println("Play Again? (y/n): ");
-            String again = input.nextLine().trim().toLowerCase();
-            playAgain = again.startsWith("y");
-
     }
 }

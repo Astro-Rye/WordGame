@@ -7,8 +7,8 @@ public class Phrases {
     public Phrases() {
         if(gamePhrase == null) {
             gamePhrase = "";
-            this.playingPhrase = maskPhrase(gamePhrase);
         }
+        this.playingPhrase = maskPhrase(gamePhrase);
     }
 
 
