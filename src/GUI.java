@@ -45,9 +45,32 @@ public class GUI extends JFrame {
         setLocationRelativeTo(null);
 
     }
-    private void onAddPlayer(ActionEvent e){}
+    private void onAddPlayer(ActionEvent e){
+        String first = JOptionPane.showInputDialog(this, "Players first name");
+        if(first == null || first.isBlank()) return;
+
+        String last = JOptionPane.showInputDialog(this, "Last name (optional): ");
+        Players p = (last != null && !last.isBlank()) ? new Players(first, last) : new Players(first);
+        players.add(p);
+        updatePlayersLabel();
+    }
+    private void updatePlayersLabel() {
+        if(players.isEmpty()) {
+            playersLbl.setText("Players: (none)");
+            return;
+        }
+        StringBuilder sb = new StringBuilder("Players: ");
+        for(int i = 0; i < players.size(); i++) {
+            Players p = players.get(i);
+            sb.append(p.getFirstName());
+            if(p.getLastName() != null && !p.getLastName().isBlank()) sb.append(" ").append(p.getLastName());
+            if(i < players.size() -1) sb.append(", ");
+        }
+        playersLbl.setText(sb.toString());
+    }
     private void onSetHostAndPhrase(ActionEvent e){}
     private void onTurn(ActionEvent e){}
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
