@@ -68,7 +68,22 @@ public class GUI extends JFrame {
         }
         playersLbl.setText(sb.toString());
     }
-    private void onSetHostAndPhrase(ActionEvent e){}
+    private void onSetHostAndPhrase(ActionEvent e){
+        String hostFirst = JOptionPane.showInputDialog(this, "Host first name: ");
+        if(hostFirst == null || hostFirst.isBlank()) return;
+
+        String hostLast = JOptionPane.showInputDialog(this, "Host last name (optional):");
+        host = (hostLast != null && !hostLast.isBlank()) ? new Hosts(hostFirst, hostLast) : new Hosts(hostFirst);
+        hostLbl.setText("Host: " + host.getFirstName() + ((host.getLastName() != null && !host.getLastName().isBlank()) ? " " + host.getLastName() : ""));
+
+        String phrase = JOptionPane.showInputDialog(this, "Enter phrase for this round:");
+        if(phrase == null) return;
+
+        round = host.startRoundWithPhrase(phrase); // your existing method
+        phraseLbl.setText("Phrase: " + round.getPlayingPhrase());
+        playerIdx = 0; // reset to first player for new phrase
+
+    }
     private void onTurn(ActionEvent e){}
 
 
