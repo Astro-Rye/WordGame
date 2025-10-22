@@ -20,4 +20,20 @@ public class GUI extends JFrame {
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
     private final JButton turnBtn = new JButton("Start / Next Turn");
+
+    public GUI(){
+        super("WordGame - Lesson 7");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        JPanel root = new JPanel(new GridLayout(0, 1, 8, 8));
+        root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
+
+        root.add(playersLbl);
+        root.add(addPlayersBtn);
+        root.add(hostLbl);
+        root.add(setHostbtn);
+        root.add(phraseLbl);
+        root.add(turnBtn);
+        setContentPane(root);
+    }
 }
