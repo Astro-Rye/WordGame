@@ -84,7 +84,57 @@ public class GUI extends JFrame {
         playerIdx = 0; // reset to first player for new phrase
 
     }
-    private void onTurn(ActionEvent e){}
+    private void onTurn(ActionEvent e){
+        if(players.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Add at least one player first.");
+            return;
+        }
+        if(host == null || round == null) {
+            JOptionPane.showMessageDialog(this, "Set host and phrase first. ");
+            return;
+        }
+        Players current = players.get(playerIdx);
+        String guess = JOptionPane.showInputDialog(this, current.getFirstName() + ", enter ONE letter: ");
+        if(guess == null) return; // canceled
+
+        boolean correct;
+        try{
+            int revealed = round.findLetters(guess);
+            correct = (revealed > 0);
+        } catch (MultipleLettersException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            return;
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Please enter a single letter (A-Z).");
+            return;
+        }
+        // Decide Prize (re-uses Award system)
+        java.util.Random rng = new java.util.Random();
+        Award award = rng.nextBoolean() ? new Money() : new Physical();
+        int delta = award.displayWinnings(current, correct);
+        current.setMoney(current.getMoney() + delta);
+
+        // Update UI
+        phraseLbl.setText("Phrase: " + round.getPlayingPhrase());
+        JOptionPane.showMessageDialog(this, current.toString());
+
+        if(round.isSolved()) {
+            int again = JOptionPane.showConfirmDialog(this, "Solved! Play another round", "Play again", JOptionPane.YES_NO_OPTION);
+
+            if(again == JOptionPane.YES_OPTION) {
+                String phrase = JOptionPane.showInputDialog(this, host.getFirstName() + ", new phrase:");
+                if(phrase != null) {
+                    round = host.startRoundWithPhrase(phrase);
+                    phraseLbl.setText("Phrase: " + round.getPlayingPhrase());
+                    playerIdx = 0;
+                }
+            }
+            return;
+        }
+        // Next player
+        playerIdx = (playerIdx + 1) % players.size();
+
+    }
 
 
     public static void main(String[] args) {
