@@ -35,5 +35,21 @@ public class GUI extends JFrame {
         root.add(phraseLbl);
         root.add(turnBtn);
         setContentPane(root);
+
+        // write action
+        addPlayersBtn.addActionListener(this::onAddPlayer);
+        setHostbtn.addActionListener(this::onSetHostAndPhrase);
+        turnBtn.addActionListener(this::onTurn);
+
+        pack();
+        setLocationRelativeTo(null);
+
+    }
+    private void onAddPlayer(ActionEvent e){}
+    private void onSetHostAndPhrase(ActionEvent e){}
+    private void onTurn(ActionEvent e){}
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new GUI().setVisible(true));
     }
 }
