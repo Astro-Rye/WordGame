@@ -4,7 +4,7 @@ public class GamePlay {
     // instance variables of Players
     private static Players[] currentPlayers = new Players[3]; // holds 3 elements of type player
 
-   /* public static void main(String[] args) {
+   public static void main(String[] args) {
         Scanner input = new Scanner(System.in); // only for name + play again
         // Host first, then generate the random number
         Hosts host = new Hosts("Pat");
@@ -53,5 +53,5 @@ public class GamePlay {
                 playAgain = again.startsWith("y");
             }
     }
-    */
+
 }

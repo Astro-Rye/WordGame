@@ -15,11 +15,25 @@ public class GUI extends JFrame {
     private final JLabel playersLbl = new JLabel("Players: (none) ");
     private final JButton addPlayersBtn = new JButton("Add Player");
 
+    // New UI Fields
+    private final JCheckBox saveMessagesChk = new JCheckBox("Save Messages", true);
+    private final JTextArea messagesArea = new JTextArea(8, 50); // grows with scroll
+    private final JScrollPane messagesScroll = new JScrollPane(messagesArea);
+
+
+
     private final JLabel hostLbl = new JLabel("Host: (none)");
     private final JButton setHostbtn = new JButton("Set Host & Phrase");
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
     private final JButton turnBtn = new JButton("Start / Next Turn");
+
+    JMenuBar menuBar = new JMenuBar();
+    JMenu fileMenu = new JMenu("File");
+    JMenu editMenu = new JMenu("Edit");
+
+    JButton button = new JButton();
+
 
     public GUI(){
         super("WordGame - Lesson 7");
@@ -135,6 +149,30 @@ public class GUI extends JFrame {
         playerIdx = (playerIdx + 1) % players.size();
 
     }
+
+    private void buildMenuBar() {
+        JMenuBar bar = new JMenuBar();
+
+        // Game Menu
+        JMenu game = new JMenu("Game");
+        JMenuItem addPlayerItem = new JMenuItem("Add Player..");
+        JMenuItem setHostPhraseItem = new JMenuItem("Set Host & Phrase");
+        JMenuItem nextTurnItem = new JMenuItem("Start / Next Turn");
+        JMenuItem exitItem = new JMenuItem("Exit");
+
+        addPlayerItem.addActionListener(this::onAddPlayer);
+        setHostPhraseItem.addActionListener(this::onTurn);
+        nextTurnItem.addActionListener(this::onTurn);
+        exitItem.addActionListener(e -> dispose());
+
+        game.add(addPlayerItem);
+        game.add(setHostPhraseItem);
+        game.add(nextTurnItem);
+        game.add(exitItem);
+
+        // Help Menu
+    }
+
 
 
     public static void main(String[] args) {
