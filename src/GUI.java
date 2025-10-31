@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.awt.event.KeyEvent;
+
 
 public class GUI extends JFrame {
 
@@ -38,6 +40,7 @@ public class GUI extends JFrame {
     public GUI(){
         super("WordGame - Lesson 7");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        buildMenuBar();
 
         JPanel root = new JPanel(new GridLayout(0, 1, 8, 8));
         root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
@@ -170,7 +173,21 @@ public class GUI extends JFrame {
         game.add(nextTurnItem);
         game.add(exitItem);
 
-        // Help Menu
+        // About Menu
+        JMenu about = new JMenu("About");
+        about.setMnemonic(KeyEvent.VK_A);
+
+        JMenuItem layoutItem = new JMenuItem("Layout..");
+        layoutItem.addActionListener(e ->
+                JOptionPane.showMessageDialog(this,
+                        "Layout choice: BorderLayout (NORTH = info labels, CENTER = main area, SOUTH = messages).\n " +
+                        "simple, readable, and easy to extend next week. ",
+                        "Layout", JOptionPane.INFORMATION_MESSAGE)
+        );
+        about.add(layoutItem);
+        bar.add(game);
+        bar.add(about);
+        setJMenuBar(bar);
     }
 
 
