@@ -40,16 +40,6 @@ public class GUI extends JFrame {
         buildMenuBar();
         buildInterface(); // new layout
 
-        JPanel root = new JPanel(new GridLayout(0, 1, 8, 8));
-        root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
-
-        root.add(playersLbl);
-
-        root.add(hostLbl);
-
-        root.add(phraseLbl);
-
-        setContentPane(root);
 
         // write action
     }
@@ -75,7 +65,7 @@ public class GUI extends JFrame {
         // SOUTH: messages + Save Messages checkbox
         messagesArea.setEditable(false);
         messagesScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        saveMessagesChk.setToolTipText("If checked, new nessages append: if unchecked, each message replaces the previous.");
+        saveMessagesChk.setToolTipText("If checked, new messages append: if unchecked, each message replaces the previous.");
 
         JPanel south = new JPanel(new BorderLayout(6, 6));
         south.add(messagesScroll, BorderLayout.CENTER);
@@ -122,7 +112,9 @@ public class GUI extends JFrame {
         round = host.startRoundWithPhrase(phrase); // your existing method
         phraseLbl.setText("Phrase: " + round.getPlayingPhrase());
         playerIdx = 0; // reset to first player for new phrase
-
+        clearMessages();
+        log("New round started by " + host.getFirstName() + ".");
+        log("Phrase: " + round.getPlayingPhrase());
     }
     private void onTurn(ActionEvent e){
         if(players.isEmpty()) {
@@ -213,6 +205,18 @@ public class GUI extends JFrame {
         bar.add(game);
         bar.add(about);
         setJMenuBar(bar);
+    }
+
+    private void log(String text){
+        if(saveMessagesChk.isSelected()) {
+            messagesArea.append(text + "\n");
+            messagesArea.setCaretPosition(messagesArea.getDocument().getLength());
+        } else {
+            messagesArea.setText(text + "\n");
+        }
+    }
+    private void clearMessages(){
+        messagesArea.setText("");
     }
 
 
