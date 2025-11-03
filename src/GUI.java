@@ -27,25 +27,22 @@ public class GUI extends JFrame {
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
 
-    JMenuBar menuBar = new JMenuBar();
-    JMenu fileMenu = new JMenu("File");
-    JMenu editMenu = new JMenu("Edit");
-
-    JButton button = new JButton();
 
 
     public GUI(){
         super("WordGame - Lesson 8");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         buildMenuBar();
         buildInterface(); // new layout
 
-
+        pack();
+        setLocationRelativeTo(null);
         // write action
     }
     // builder method
     private void buildInterface() {
-        // root with borderlayout
+        // root with border-layout
         JPanel root = new JPanel(new BorderLayout(8,8));
         root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
@@ -117,27 +114,23 @@ public class GUI extends JFrame {
         log("Phrase: " + round.getPlayingPhrase());
     }
     private void onTurn(ActionEvent e){
-        if(players.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Add at least one player first.");
-            return;
-        }
-        if(host == null || round == null) {
-            JOptionPane.showMessageDialog(this, "Set host and phrase first. ");
-            return;
-        }
+        if (players.isEmpty()) {log("Please add at least one player first."); return; }
+        if(host == null || round == null) { log("Please set host and phrase first."); return; }
+
         Players current = players.get(playerIdx);
         String guess = JOptionPane.showInputDialog(this, current.getFirstName() + ", enter ONE letter: ");
         if(guess == null) return; // canceled
 
         boolean correct;
+
         try{
             int revealed = round.findLetters(guess);
             correct = (revealed > 0);
         } catch (MultipleLettersException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            log(ex.getMessage()); // More than  one letter was entered
             return;
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a single letter (A-Z).");
+            log("Please enter a single letter (A-Z)");
             return;
         }
         // Decide Prize (re-uses Award system)
@@ -148,9 +141,11 @@ public class GUI extends JFrame {
 
         // Update UI
         phraseLbl.setText("Phrase: " + round.getPlayingPhrase());
-        JOptionPane.showMessageDialog(this, current.toString());
+
+        log(current.toString());
 
         if(round.isSolved()) {
+            log("The phrase has been solved!");
             int again = JOptionPane.showConfirmDialog(this, "Solved! Play another round", "Play again", JOptionPane.YES_NO_OPTION);
 
             if(again == JOptionPane.YES_OPTION) {
