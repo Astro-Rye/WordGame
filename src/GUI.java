@@ -15,9 +15,7 @@ public class GUI extends JFrame {
 
     // UI
     private final JLabel playersLbl = new JLabel("Players: (none) ");
-    private final JButton addPlayersBtn = new JButton("Add Player");
 
-    // New UI Fields
     private final JCheckBox saveMessagesChk = new JCheckBox("Save Messages", true);
     private final JTextArea messagesArea = new JTextArea(8, 50); // grows with scroll
     private final JScrollPane messagesScroll = new JScrollPane(messagesArea);
@@ -25,10 +23,9 @@ public class GUI extends JFrame {
 
 
     private final JLabel hostLbl = new JLabel("Host: (none)");
-    private final JButton setHostbtn = new JButton("Set Host & Phrase");
+
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
-    private final JButton turnBtn = new JButton("Start / Next Turn");
 
     JMenuBar menuBar = new JMenuBar();
     JMenu fileMenu = new JMenu("File");
@@ -38,29 +35,55 @@ public class GUI extends JFrame {
 
 
     public GUI(){
-        super("WordGame - Lesson 7");
+        super("WordGame - Lesson 8");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         buildMenuBar();
+        buildInterface(); // new layout
 
         JPanel root = new JPanel(new GridLayout(0, 1, 8, 8));
         root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
         root.add(playersLbl);
-        root.add(addPlayersBtn);
+
         root.add(hostLbl);
-        root.add(setHostbtn);
+
         root.add(phraseLbl);
-        root.add(turnBtn);
+
         setContentPane(root);
 
         // write action
-        addPlayersBtn.addActionListener(this::onAddPlayer);
-        setHostbtn.addActionListener(this::onSetHostAndPhrase);
-        turnBtn.addActionListener(this::onTurn);
+    }
+    // builder method
+    private void buildInterface() {
+        // root with borderlayout
+        JPanel root = new JPanel(new BorderLayout(8,8));
+        root.setBorder(BorderFactory.createEmptyBorder(12, 12, 12, 12));
 
-        pack();
-        setLocationRelativeTo(null);
+        // North: Stacked Labels
+        JPanel info = new JPanel();
+        info.setLayout(new BoxLayout(info, BoxLayout.Y_AXIS));
+        info.add(playersLbl);
+        info.add(hostLbl);
+        info.add(phraseLbl);
+        root.add(info, BorderLayout.NORTH);
 
+        // CENTER : placeholder panel ( future canvas / big phrase )
+        JPanel center = new JPanel();
+        center.add(new JLabel("Game area ( future expansion"));
+        root.add(center, BorderLayout.CENTER);
+
+        // SOUTH: messages + Save Messages checkbox
+        messagesArea.setEditable(false);
+        messagesScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        saveMessagesChk.setToolTipText("If checked, new nessages append: if unchecked, each message replaces the previous.");
+
+        JPanel south = new JPanel(new BorderLayout(6, 6));
+        south.add(messagesScroll, BorderLayout.CENTER);
+        south.add(saveMessagesChk, BorderLayout.SOUTH);
+
+        root.add(south, BorderLayout.SOUTH);
+
+        setContentPane(root);
     }
     private void onAddPlayer(ActionEvent e){
         String first = JOptionPane.showInputDialog(this, "Players first name");
@@ -156,15 +179,17 @@ public class GUI extends JFrame {
     private void buildMenuBar() {
         JMenuBar bar = new JMenuBar();
 
-        // Game Menu
+        // Game Menu (Alt+G)
         JMenu game = new JMenu("Game");
+        game.setMnemonic(KeyEvent.VK_G);
+
         JMenuItem addPlayerItem = new JMenuItem("Add Player..");
         JMenuItem setHostPhraseItem = new JMenuItem("Set Host & Phrase");
         JMenuItem nextTurnItem = new JMenuItem("Start / Next Turn");
         JMenuItem exitItem = new JMenuItem("Exit");
 
         addPlayerItem.addActionListener(this::onAddPlayer);
-        setHostPhraseItem.addActionListener(this::onTurn);
+        setHostPhraseItem.addActionListener(this::onSetHostAndPhrase);
         nextTurnItem.addActionListener(this::onTurn);
         exitItem.addActionListener(e -> dispose());
 
