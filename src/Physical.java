@@ -12,11 +12,11 @@ public class Physical implements Award{
 
         // Match array: same index as prize
     private static final String[] PRIZE_IMAGES = {
-          "WordGame/resources/vacation.jpeg",
-           "WordGame/resources/car.jpeg",
-           "WordGame/resources/fridge.jpeg",
-           "WordGame/resources/disney.jpeg",
-           "WordGame/resources/cruise.jpeg"
+          "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg"
         };
     private final Random rand = new Random();
 
@@ -28,13 +28,17 @@ public class Physical implements Award{
        int index = getRandomPrizeIndex();
        String prizeName = PRIZES[index];
 
-        ImageIcon icon = null;
-        String imagePath = PRIZE_IMAGES[index];
+       String imagePath = PRIZE_IMAGES[index];
+       java.io.File f = new java.io.File(imagePath);
+        System.out.println("Trying image path: " + f.getAbsolutePath());
+        System.out.println("Exists? " + f.exists());
 
+        ImageIcon icon = null;
         try {
             icon = new ImageIcon(imagePath);
         } catch ( Exception e ) {
             // if image fails to load, skip the icon
+            e.printStackTrace();
         }
         if(correct) {
             String msg = players.getFirstName() + "won: " + prizeName + "!";
