@@ -27,6 +27,9 @@ public class GUI extends JFrame {
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
 
+    private static final String CORRECT_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\correct.mp3";
+    private static final String WRONG_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\wrong.mp3";
+
 
 
     public GUI(){
@@ -132,6 +135,13 @@ public class GUI extends JFrame {
         } catch (IllegalArgumentException ex) {
             log("Please enter a single letter (A-Z)");
             return;
+        }
+        // add sound
+        // play sound based on correctness
+        if(correct) {
+            SoundPlayer.play(CORRECT_SOUND_PATH);
+        } else {
+            SoundPlayer.play(WRONG_SOUND_PATH);
         }
         // Decide Prize (re-uses Award system)
         java.util.Random rng = new java.util.Random();
