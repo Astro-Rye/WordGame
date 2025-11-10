@@ -13,10 +13,10 @@ public class Physical implements Award{
         // Match array: same index as prize
     private static final String[] PRIZE_IMAGES = {
           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
-           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
-           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
-           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg",
-           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\car.jpg"
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\cruise.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\disney.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\fridge.jpg",
+           "C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\vacation.jpg"
         };
     private final Random rand = new Random();
 

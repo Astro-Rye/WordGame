@@ -27,9 +27,10 @@ public class GUI extends JFrame {
 
     private final JLabel phraseLbl = new JLabel("Phrase: (not set)");
 
-    private static final String CORRECT_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\correct.mp3";
-    private static final String WRONG_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\wrong.mp3";
+    private static final String CORRECT_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\boxing_bell.wav";
+    private static final String WRONG_SOUND_PATH ="C:\\Users\\JCarrillo8\\rscJavaProjects\\WordGame\\WordGame\\resources\\buzzer_x.wav";
 
+    private AnimationPanel animationPanel = new AnimationPanel();
 
 
     public GUI(){
@@ -58,9 +59,10 @@ public class GUI extends JFrame {
         root.add(info, BorderLayout.NORTH);
 
         // CENTER : placeholder panel ( future canvas / big phrase )
-        JPanel center = new JPanel();
-        center.add(new JLabel("Game area ( future expansion"));
-        root.add(center, BorderLayout.CENTER);
+        //JPanel center = new JPanel();
+        //center.add(new JLabel("Game area ( future expansion"));
+        //root.add(center, BorderLayout.CENTER);
+        root.add(animationPanel, BorderLayout.CENTER);
 
         // SOUTH: messages + Save Messages checkbox
         messagesArea.setEditable(false);
@@ -142,6 +144,19 @@ public class GUI extends JFrame {
             SoundPlayer.play(CORRECT_SOUND_PATH);
         } else {
             SoundPlayer.play(WRONG_SOUND_PATH);
+        }
+
+        // Play sound based on correctness
+        if(correct){
+            SoundPlayer.play(CORRECT_SOUND_PATH);
+        } else {
+            SoundPlayer.play(WRONG_SOUND_PATH);
+
+            // 50% CHANCE TO TRIGGER A 'WHAMMY' animation
+            if(new java.util.Random().nextBoolean()) {
+                animationPanel.startAnimation();
+                log("Whammy animation triggered!");
+            }
         }
         // Decide Prize (re-uses Award system)
         java.util.Random rng = new java.util.Random();
