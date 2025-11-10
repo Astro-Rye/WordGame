@@ -1,5 +1,6 @@
 # WordGame
-
+### Lesson 10: GUI Game
+![Lesson10 - GUI.JPG](resources/Lesson10%20-%20GUI.JPG)
 ### Lesson 5: Console WordGame Output
 Enter first name for player 1 :
 Joseph
