@@ -40,7 +40,8 @@ public class AnimationPanel extends JPanel {
 
         if(running) {
             g.setColor(Color.RED);
-            g.fillRect(x, y, 40, 40); // red square whammy
+            g.fillRect(x, y, 400, 100);
+            setBackground(Color.black);// red square whammy
         }
     }
 }
